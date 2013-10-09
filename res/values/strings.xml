@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="popup_exit">Exit</string>
+	<string name="popup_unblock">Unlock all options your live wallpaper!</string>
+	<string name="popup_text_lock">Text when content is blocked</string>
+	<string name="popup_text_unlock">Text when content is unblocked</string>
+	<string name="popup_image_summary">Image</string>
+    <string name="billing_not_supported_title">Can\'t make purchases</string>
+    <string name="billing_not_supported_message">The Market billing service is not available at this time. You can continue to use this app but you won\'t be able to make purchases.</string>
+    <string name="billing_title">Button to buy</string>
+    <string name="billing_summary">Summary\'s button</string>	
+</resources>

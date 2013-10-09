@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="popup_exit">Quitter</string>
+	<string name="popup_unblock">Débloque toutes les options de ton livewallpaper !</string>
+	<string name="popup_text_lock">Débloque du contenu exclusif pour ton Livewallpaper : \nAffiche ****, profite de tous les effets visuels et lance de vrais ****** en secouant ton téléphone !</string>
+	<string name="popup_text_unlock">Texte après l\'achat</string>
+	<string name="popup_image_summary">Résumé de l\'Image</string>
+    <string name="billing_not_supported_title">Ne supporte pas l\'achat</string>
+    <string name="billing_not_supported_message">Le service de facturation n\'est pas disponible pour le moment. Vous pouvez continuer à utiliser cette application, mais vous ne serez pas en mesure de faire des achats.</string>
+    <string name="billing_title">Bouton pour acheter</string>
+    <string name="billing_summary">Résumé du bouton</string>	
+</resources>
