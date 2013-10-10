@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="popup_exit">Exit</string>
-	<string name="popup_unblock">Unlock all options your live wallpaper!</string>
+	<string name="popup_button_exit">Exit</string>
+	<string name="popup_button_unblock">Unlock all options your live wallpaper!</string>
 	<string name="popup_text_lock">Text when content is blocked</string>
 	<string name="popup_text_unlock">Text when content is unblocked</string>
 	<string name="popup_image_summary">Image</string>

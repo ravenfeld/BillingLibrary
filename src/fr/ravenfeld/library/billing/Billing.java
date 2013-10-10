@@ -1,5 +1,6 @@
 package fr.ravenfeld.library.billing;
 
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -40,10 +41,10 @@ public class Billing extends AbstractBillingActivity {
 
 
 
-    public void onCreate(Bundle savedInstanceState, String sharedPrefsName, String keyPrefBilling, String idProduct, String keyPublicBilling,
+    public void onCreate(Bundle savedInstanceState, String sharedPrefName, String keyPrefBilling, String idProduct, String keyPublicBilling,
 			int idImage, double sizePopup, double sizePadding) {
 		super.onCreate(savedInstanceState);
-		mSharedPreferences = getBaseContext().getSharedPreferences(sharedPrefsName, 0);
+		mSharedPreferences = getBaseContext().getSharedPreferences(sharedPrefName, 0);
 		mKeyPrefBilling = keyPrefBilling;
 		mIdProduct = idProduct;
 		mKeyPublicBilling = keyPublicBilling;
@@ -54,9 +55,10 @@ public class Billing extends AbstractBillingActivity {
 		BillingController.checkBillingSupported(this);
 	}
 
-    protected void onPause(){
-	super.onPause();
-       	finish();
+
+    protected void onResume(){
+        super.onResume();
+        restoreTransactions();
     }
     
 	private void showPopup() {

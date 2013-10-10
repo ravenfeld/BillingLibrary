@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="popup_exit">Quitter</string>
-	<string name="popup_unblock">Débloque toutes les options de ton livewallpaper !</string>
+	<string name="popup_button_exit">Quitter</string>
+	<string name="popup_button_unblock">Débloque toutes les options de ton livewallpaper !</string>
 	<string name="popup_text_lock">Débloque du contenu exclusif pour ton Livewallpaper : \nAffiche ****, profite de tous les effets visuels et lance de vrais ****** en secouant ton téléphone !</string>
 	<string name="popup_text_unlock">Texte après l\'achat</string>
 	<string name="popup_image_summary">Résumé de l\'Image</string>

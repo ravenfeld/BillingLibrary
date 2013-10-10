@@ -36,13 +36,13 @@
             android:id="@+id/unblock_button"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/popup_unblock"/>
+            android:text="@string/popup_button_unblock"/>
         
 	    <Button
 	        android:id="@+id/exit_button"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
-	        android:text="@string/popup_exit"/>   
+	        android:text="@string/popup_button_exit"/>
     
 	</LinearLayout>
   
