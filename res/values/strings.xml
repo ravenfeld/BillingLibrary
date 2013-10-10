@@ -7,6 +7,5 @@
 	<string name="popup_image_summary">Image</string>
     <string name="billing_not_supported_title">Can\'t make purchases</string>
     <string name="billing_not_supported_message">The Market billing service is not available at this time. You can continue to use this app but you won\'t be able to make purchases.</string>
-    <string name="billing_title">Button to buy</string>
-    <string name="billing_summary">Summary\'s button</string>	
+	
 </resources>
