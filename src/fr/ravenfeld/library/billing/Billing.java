@@ -54,7 +54,11 @@ public class Billing extends AbstractBillingActivity {
 		BillingController.checkBillingSupported(this);
 	}
 
-
+    protected void onPause(){
+	super.onPause();
+       	finish();
+    }
+    
 	private void showPopup() {
 		boolean appBuy = mSharedPreferences.getBoolean(mKeyPrefBilling, false);
 		if (!appBuy) {
