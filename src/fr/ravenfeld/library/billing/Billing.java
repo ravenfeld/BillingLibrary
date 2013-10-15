@@ -111,13 +111,12 @@ public class Billing extends AbstractBillingActivity {
 	}
 
 	private Bitmap scaleBitmap(Bitmap b, int width) {
-		Bitmap result = null;
 		int bw = b.getWidth();
 		int bh = b.getHeight();
 		double s = (double) width / (double) bw;
 		int newHeight = (int) (bh * s);
 
-		result = Bitmap.createScaledBitmap(b, width, newHeight, false);
+        Bitmap result = Bitmap.createScaledBitmap(b, width, newHeight, false);
 		return (result);
 	}
 

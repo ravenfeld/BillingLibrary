@@ -3,18 +3,19 @@
     android:versionCode="1"
     android:versionName="1.0">
 
-    <uses-sdk android:minSdkVersion="7" android:targetSdkVersion="18" />
-    <uses-permission android:name="com.android.vending.BILLING" />
-    <activity android:theme="@style/Theme.Dialog.Custom" android:name="fr.ravenfeld.billing.Billing" android:screenOrientation="portrait" />
-    <service android:name="net.robotmedia.billing.BillingService" />
-    <receiver
-        android:name="net.robotmedia.billing.BillingReceiver"
-        android:permission="com.android.vending.BILLING">
-        <intent-filter>
-            <action android:name="com.android.vending.billing.IN_APP_NOTIFY" />
-            <action android:name="com.android.vending.billing.RESPONSE_CODE" />
-            <action android:name="com.android.vending.billing.PURCHASE_STATE_CHANGED" />
-        </intent-filter>
-    </receiver>
-
+        <uses-sdk android:minSdkVersion="7" android:targetSdkVersion="18" />
+    <!--  <uses-permission android:name="com.android.vending.BILLING" />
+     <application>
+     <activity android:theme="@style/Theme.Dialog.Custom" android:name="fr.ravenfeld.library.billing.Billing" android:screenOrientation="portrait" />
+     <service android:name="net.robotmedia.billing.BillingService" />
+     <receiver
+         android:name="net.robotmedia.billing.BillingReceiver"
+         android:permission="com.android.vending.BILLING">
+         <intent-filter>
+             <action android:name="com.android.vending.billing.IN_APP_NOTIFY" />
+             <action android:name="com.android.vending.billing.RESPONSE_CODE" />
+             <action android:name="com.android.vending.billing.PURCHASE_STATE_CHANGED" />
+         </intent-filter>
+     </receiver>
+     </application>-->
 </manifest>
