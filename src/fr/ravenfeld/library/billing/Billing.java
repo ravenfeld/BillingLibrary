@@ -69,9 +69,6 @@ public class Billing extends AbstractBillingActivity {
         restoreTransactions();
     }
 
-
-
-
     private void showPopup() {
         boolean appBuy = mSharedPreferences.getBoolean(mKeyPrefBilling, false);
         if (!mCheckTransaction && !appBuy) {
@@ -197,7 +194,6 @@ public class Billing extends AbstractBillingActivity {
             List<Transaction> transactions = BillingController.getTransactions(this.getBaseContext(), mIdProduct);
             if (transactions.isEmpty()) {
                 showPopup();
-
             }
             for (Transaction transaction : transactions) {
                 if (transaction.purchaseState == PurchaseState.PURCHASED) {
