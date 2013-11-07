@@ -210,9 +210,15 @@ public class Billing extends AbstractBillingActivity {
     public void onPurchaseStateChanged(String id_product, PurchaseState status) {
         if (id_product.equalsIgnoreCase(mIdProduct) && status == PurchaseState.PURCHASED) {
             purchasedApp();
-            mExitButton.setVisibility(Button.VISIBLE);
-            mBuyButton.setVisibility(Button.GONE);
-            mTextView.setText(R.string.popup_text_unlock);
+            if(mExitButton != null){
+                mExitButton.setVisibility(Button.VISIBLE);
+            }
+            if(mBuyButton != null){
+                mBuyButton.setVisibility(Button.GONE);
+            }
+            if(mTextView != null){
+                mTextView.setText(R.string.popup_text_unlock);
+            }
         } else {
             canceledApp();
         }
@@ -222,9 +228,15 @@ public class Billing extends AbstractBillingActivity {
     public void onRequestPurchaseResponse(String id_product, ResponseCode code) {
         if (id_product.equalsIgnoreCase(mIdProduct) && code == ResponseCode.RESULT_OK) {
             purchasedApp();
-            mExitButton.setVisibility(Button.VISIBLE);
-            mBuyButton.setVisibility(Button.GONE);
-            mTextView.setText(R.string.popup_text_unlock);
+            if(mExitButton != null){
+                mExitButton.setVisibility(Button.VISIBLE);
+            }
+            if(mBuyButton != null){
+                mBuyButton.setVisibility(Button.GONE);
+            }
+            if(mTextView != null){
+                mTextView.setText(R.string.popup_text_unlock);
+            }
         } else {
             canceledApp();
         }
