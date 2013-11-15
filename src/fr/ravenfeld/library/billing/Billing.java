@@ -72,7 +72,6 @@ public class Billing extends AbstractBillingActivity {
     private void showPopup() {
         boolean appBuy = mSharedPreferences.getBoolean(mKeyPrefBilling, false);
         if (!mCheckTransaction && !appBuy) {
-            setContentView(R.layout.main);
             initView();
             initButtons();
 
@@ -83,7 +82,7 @@ public class Billing extends AbstractBillingActivity {
     }
 
     private void initView() {
-
+        setContentView(R.layout.main);
         Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         int layoutWidth = (int) (display.getWidth() * mSizePopup);
         if (layoutWidth % 2 == 0) {
@@ -98,7 +97,7 @@ public class Billing extends AbstractBillingActivity {
         main.removeAllViewsInLayout();
 
         main.addView(popup, layoutParam);
-
+/*
         final float dpi = getResources().getDisplayMetrics().density;
         int pixel = Math.round((float) ((mSizePadding * dpi)));
 
@@ -112,11 +111,12 @@ public class Billing extends AbstractBillingActivity {
         if (imageWidth % 2 == 0) {
             imageWidth += 1;
         }
-
+*/
         ImageView image = (ImageView) findViewById(R.id.image);
         Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(), mIdImage);
         image.setImageBitmap(scaleBitmap(imageBitmap, layoutWidth));
-
+        mBuyButton = (Button) findViewById(R.id.unblock_button);
+        mExitButton = (Button) findViewById(R.id.exit_button);
         mTextView = (TextView) findViewById(R.id.text);
     }
 
@@ -131,7 +131,6 @@ public class Billing extends AbstractBillingActivity {
     }
 
     private void initButtons() {
-        mBuyButton = (Button) findViewById(R.id.unblock_button);
         mBuyButton.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -140,7 +139,6 @@ public class Billing extends AbstractBillingActivity {
             }
         });
 
-        mExitButton = (Button) findViewById(R.id.exit_button);
         mExitButton.setOnClickListener(new OnClickListener() {
 
             @Override
