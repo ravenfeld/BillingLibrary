@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -40,7 +41,7 @@ public class Billing extends AbstractBillingActivity {
     private double mSizePopup;
     private double mSizePadding;
     private int mIdImage;
-    private boolean mCheckTransaction;
+    private boolean mCheckTransaction=false;
 
     public void onCreate(Bundle savedInstanceState, String sharedPrefName, String keyPrefBilling, String idProduct, String keyPublicBilling,
                          int idImage, double sizePopup, double sizePadding) {
@@ -82,7 +83,7 @@ public class Billing extends AbstractBillingActivity {
     }
 
     private void initView() {
-        setContentView(R.layout.main);
+        setContentView(R.layout.popup_full);
         Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         int layoutWidth = (int) (display.getWidth() * mSizePopup);
         if (layoutWidth % 2 == 0) {
@@ -92,7 +93,7 @@ public class Billing extends AbstractBillingActivity {
         LinearLayout.LayoutParams layoutParam = new LinearLayout.LayoutParams(layoutWidth, 0);
         layoutParam.height = LayoutParams.FILL_PARENT;
 
-        LinearLayout main = (LinearLayout) findViewById(R.id.main);
+        LinearLayout main = (LinearLayout) findViewById(R.id.popup_billing);
 
         main.removeAllViewsInLayout();
 
