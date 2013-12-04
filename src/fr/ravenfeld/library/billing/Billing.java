@@ -31,20 +31,21 @@ public class Billing extends AbstractBillingActivity {
 
     public static final String EXTRA_CHECK_TRANSACTION =
             "fr.ravenfeld.library.billing.EXTRA_CHECK_TRANSACTION";
-    private Button mBuyButton;
-    private Button mExitButton;
+    private View mBuyButton;
+    private View mExitButton;
     private TextView mTextView;
     private SharedPreferences mSharedPreferences;
     private String mIdProduct;
     private String mKeyPublicBilling;
     private String mKeyPrefBilling;
     private double mSizePopup;
-    private double mSizePadding;
     private int mIdImage;
-    private boolean mCheckTransaction=false;
+    private boolean mCheckTransaction = false;
+    private int mIdLayout;
+    private boolean mLayoutUser = false;
 
     public void onCreate(Bundle savedInstanceState, String sharedPrefName, String keyPrefBilling, String idProduct, String keyPublicBilling,
-                         int idImage, double sizePopup, double sizePadding) {
+                         int idImage, double sizePopup) {
 
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
@@ -58,12 +59,30 @@ public class Billing extends AbstractBillingActivity {
         mIdProduct = idProduct;
         mKeyPublicBilling = keyPublicBilling;
         mSizePopup = sizePopup;
-        mSizePadding = sizePadding;
         mIdImage = idImage;
         BillingController.registerObserver(mBillingObserver);
         BillingController.checkBillingSupported(this);
     }
 
+    public void onCreate(Bundle savedInstanceState, String sharedPrefName, String keyPrefBilling, String idProduct, String keyPublicBilling,
+                         int idLayout) {
+
+        super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+
+        if (intent != null) {
+            mCheckTransaction = intent.getBooleanExtra(EXTRA_CHECK_TRANSACTION, false);
+        }
+
+        mSharedPreferences = getBaseContext().getSharedPreferences(sharedPrefName, 0);
+        mKeyPrefBilling = keyPrefBilling;
+        mIdProduct = idProduct;
+        mKeyPublicBilling = keyPublicBilling;
+        mLayoutUser = true;
+        mIdLayout = idLayout;
+        BillingController.registerObserver(mBillingObserver);
+        BillingController.checkBillingSupported(this);
+    }
 
     protected void onResume() {
         super.onResume();
@@ -83,6 +102,14 @@ public class Billing extends AbstractBillingActivity {
     }
 
     private void initView() {
+        if (mLayoutUser) {
+            initViewUser();
+        } else {
+            initViewDefault();
+        }
+    }
+
+    private void initViewDefault() {
         setContentView(R.layout.popup_full);
         Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         int layoutWidth = (int) (display.getWidth() * mSizePopup);
@@ -98,26 +125,19 @@ public class Billing extends AbstractBillingActivity {
         main.removeAllViewsInLayout();
 
         main.addView(popup, layoutParam);
-/*
-        final float dpi = getResources().getDisplayMetrics().density;
-        int pixel = Math.round((float) ((mSizePadding * dpi)));
 
-        float sizePopup = (float) (display.getWidth() * mSizePopup);
-
-        if (sizePopup % 2 == 0) {
-            sizePopup += 1;
-        }
-
-        int imageWidth = Math.round(sizePopup - pixel); // to
-        if (imageWidth % 2 == 0) {
-            imageWidth += 1;
-        }
-*/
         ImageView image = (ImageView) findViewById(R.id.image);
         Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(), mIdImage);
         image.setImageBitmap(scaleBitmap(imageBitmap, layoutWidth));
-        mBuyButton = (Button) findViewById(R.id.unblock_button);
-        mExitButton = (Button) findViewById(R.id.exit_button);
+        mBuyButton = (View) findViewById(R.id.unblock_button);
+        mExitButton = (View) findViewById(R.id.exit_button);
+        mTextView = (TextView) findViewById(R.id.text);
+    }
+
+    private void initViewUser() {
+        setContentView(mIdLayout);
+        mBuyButton = (View) findViewById(R.id.unblock_button);
+        mExitButton = (View) findViewById(R.id.exit_button);
         mTextView = (TextView) findViewById(R.id.text);
     }
 
@@ -132,30 +152,40 @@ public class Billing extends AbstractBillingActivity {
     }
 
     private void initButtons() {
-        mBuyButton.setOnClickListener(new OnClickListener() {
+        if (mBuyButton != null) {
+            mBuyButton.setOnClickListener(new OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                BillingController.requestPurchase(Billing.this, mIdProduct, true);
-            }
-        });
+                @Override
+                public void onClick(View v) {
+                    BillingController.requestPurchase(Billing.this, mIdProduct, true);
+                }
+            });
+        }
+        if (mExitButton != null) {
+            mExitButton.setOnClickListener(new OnClickListener() {
 
-        mExitButton.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+        }
 
         boolean app_buy = mSharedPreferences.getBoolean(mKeyPrefBilling, false);
         if (app_buy) {
-            mExitButton.setVisibility(Button.VISIBLE);
-            mBuyButton.setVisibility(Button.GONE);
+            if (mExitButton != null) {
+                mExitButton.setVisibility(Button.VISIBLE);
+            }
+            if (mBuyButton != null) {
+                mBuyButton.setVisibility(Button.GONE);
+            }
         } else {
-            mExitButton.setVisibility(Button.VISIBLE);
-            mBuyButton.setVisibility(Button.VISIBLE);
+            if (mExitButton != null) {
+                mExitButton.setVisibility(Button.VISIBLE);
+            }
+            if (mBuyButton != null) {
+                mBuyButton.setVisibility(Button.VISIBLE);
+            }
         }
 
     }
@@ -209,14 +239,16 @@ public class Billing extends AbstractBillingActivity {
     public void onPurchaseStateChanged(String id_product, PurchaseState status) {
         if (id_product.equalsIgnoreCase(mIdProduct) && status == PurchaseState.PURCHASED) {
             purchasedApp();
-            if(mExitButton != null){
-                mExitButton.setVisibility(Button.VISIBLE);
-            }
-            if(mBuyButton != null){
+            if (mBuyButton != null) {
                 mBuyButton.setVisibility(Button.GONE);
             }
-            if(mTextView != null){
+            if (mTextView != null) {
                 mTextView.setText(R.string.popup_text_unlock);
+            }
+            if (mExitButton != null) {
+                mExitButton.setVisibility(Button.VISIBLE);
+            }else{
+                finish();
             }
         } else {
             canceledApp();
@@ -227,14 +259,16 @@ public class Billing extends AbstractBillingActivity {
     public void onRequestPurchaseResponse(String id_product, ResponseCode code) {
         if (id_product.equalsIgnoreCase(mIdProduct) && code == ResponseCode.RESULT_OK) {
             purchasedApp();
-            if(mExitButton != null){
-                mExitButton.setVisibility(Button.VISIBLE);
-            }
-            if(mBuyButton != null){
+            if (mBuyButton != null) {
                 mBuyButton.setVisibility(Button.GONE);
             }
-            if(mTextView != null){
+            if (mTextView != null) {
                 mTextView.setText(R.string.popup_text_unlock);
+            }
+            if (mExitButton != null) {
+                mExitButton.setVisibility(Button.VISIBLE);
+            }else{
+                finish();
             }
         } else {
             canceledApp();
