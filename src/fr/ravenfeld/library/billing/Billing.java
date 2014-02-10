@@ -157,7 +157,7 @@ public class Billing extends AbstractBillingActivity {
 
                 @Override
                 public void onClick(View v) {
-                    BillingController.requestPurchase(Billing.this, mIdProduct, true);
+                    BillingController.requestPurchase(Billing.this, mIdProduct);
                 }
             });
         }
@@ -207,6 +207,11 @@ public class Billing extends AbstractBillingActivity {
         } else {
             showDialog(R.string.billing_not_supported_message);
         }
+    }
+
+    @Override
+    public void onSubscriptionChecked(boolean supported) {
+
     }
 
     @Override
